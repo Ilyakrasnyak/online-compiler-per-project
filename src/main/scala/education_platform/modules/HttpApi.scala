@@ -7,17 +7,17 @@ import org.http4s._
 import org.http4s.implicits._
 import org.http4s.server.Router
 import org.http4s.server.middleware._
-import education_platform.services.Compiler
+import education_platform.services.CompilerService
 
 object HttpApi {
   def make[F[_]: Async](
-      compiler: Compiler[F]
+      compiler: CompilerService[F]
   ): HttpApi[F] =
     new HttpApi[F](compiler) {}
 }
 
 sealed abstract class HttpApi[F[_]: Async] private (
-    compiler: Compiler[F]
+    compiler: CompilerService[F]
 ) {
 
   private val compilerRoutes = CompilerRoutes[F](compiler).routes
