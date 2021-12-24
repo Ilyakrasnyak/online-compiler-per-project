@@ -5,7 +5,7 @@ import education_platform.config.Config
 import education_platform.modules.HttpApi
 import education_platform.resources.MkHttpServer
 import education_platform.services.CompilerService
-import org.typelevel.log4cats.{Logger, SelfAwareStructuredLogger}
+import org.typelevel.log4cats.SelfAwareStructuredLogger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 
 object Main extends IOApp.Simple {

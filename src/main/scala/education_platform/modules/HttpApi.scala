@@ -24,16 +24,6 @@ sealed abstract class HttpApi[F[_]: Async] private (
 
   private val routes: HttpRoutes[F] = Router("v1/" -> compilerRoutes)
 
-  private val middleware: HttpRoutes[F] => HttpRoutes[F] = {
-    { http: HttpRoutes[F] =>
-      AutoSlash(http)
-    } andThen { http: HttpRoutes[F] =>
-      CORS(http)
-    } andThen { http: HttpRoutes[F] =>
-      Timeout(60.seconds)(http)
-    }
-  }
-
   private val loggers: HttpApp[F] => HttpApp[F] = {
     { http: HttpApp[F] =>
       RequestLogger.httpApp(logHeaders = true, logBody = true)(http)
@@ -42,6 +32,6 @@ sealed abstract class HttpApi[F[_]: Async] private (
     }
   }
 
-  val httpApp: HttpApp[F] = loggers(middleware(routes).orNotFound)
+  val httpApp: HttpApp[F] = loggers(routes.orNotFound)
 
 }

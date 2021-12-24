@@ -1,6 +1,6 @@
 package education_platform.domain.compiler
 
-import education_platform.domain.compiler.Language.{Python, Scala}
+import education_platform.domain.compiler.domen._
 
 trait Compiler[A] {
   def fileExt: String
@@ -10,19 +10,15 @@ trait Compiler[A] {
 
 object Compiler {
 
-  implicit def compiler[T :Compiler]: Compiler[Language] = new Compiler[Language] {
-    override def fileExt: String = implicitly[Compiler[T]].fileExt
+  def apply[A](implicit compiler: Compiler[A]): Compiler[A] = compiler
 
-    override def shellCommand: String = implicitly[Compiler[T]].shellCommand
-  }
-
-  implicit val pythonCompiler: Compiler[Python.type] = new Compiler[Python.type] {
+  implicit val pythonCompiler: Compiler[Python] = new Compiler[Python] {
     override def fileExt = "py"
 
     override def shellCommand = "python"
   }
 
-  implicit val scalaCompiler: Compiler[Scala.type] = new Compiler[Scala.type] {
+  implicit val scalaCompiler: Compiler[Scala] = new Compiler[Scala] {
     override def fileExt = "sc"
 
     override def shellCommand = "scala"

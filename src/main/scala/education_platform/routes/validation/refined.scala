@@ -25,7 +25,7 @@ object refined {
         case Left(e) =>
           Option(e.getCause) match {
             case Some(c) if c.getMessage.startsWith("Predicate") => BadRequest(c.getMessage)
-            case _ => UnprocessableEntity()
+            case _ => UnprocessableEntity(e.toString)
           }
         case Right(a) => f(a)
       }
