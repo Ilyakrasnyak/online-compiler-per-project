@@ -1,21 +1,19 @@
 package education_platform.domain.compiler
 
 import derevo.cats._
-import derevo.circe.magnolia.{ decoder, encoder }
+import derevo.circe.magnolia.{decoder, encoder}
 import derevo.derive
+import education_platform.domain.task.Task
 import enumeratum.{CirceEnum, Enum, EnumEntry}
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.auto._
-import eu.timepit.refined.cats._
-import eu.timepit.refined.boolean.And
-import eu.timepit.refined.numeric.NonNegative
-import eu.timepit.refined.string.MatchesRegex
+import eu.timepit.refined.string.{MatchesRegex, Regex}
 import eu.timepit.refined.types.string.NonEmptyString
 import io.estatico.newtype.macros.newtype
 import io.circe.refined._
 import io.estatico.newtype.macros.newtype
 
-object domen {
+object domain {
 
   sealed trait Language extends EnumEntry
 
@@ -31,27 +29,14 @@ object domen {
   type Python = Language.Python.type
   type Scala = Language.Scala.type
 
-  @derive(decoder, encoder)
-  case class CodeParam(value: NonEmptyString) {
-    def toDomain: Code = Code(value.toLowerCase)
-  }
-
-  @derive(decoder, encoder, eqv, show)
-  case class Code(value: String)
-
-  @derive(decoder, encoder)
-  case class VersionParam(value: NonEmptyString) {
-    def toDomain: Version = Version(value.toString)
-  }
-
-  @derive(decoder, encoder, eqv, show)
-  case class Version(value: String)
+  type Rgx = "^((?!evil).)*$"
+  type  Code = String Refined MatchesRegex[Rgx]
 
   @derive(decoder, encoder)
   case class CompileParams(
-      code: NonEmptyString,
+      task: Task,
+      code: Code,
       language: Language,
       version: NonEmptyString
   )
-
 }

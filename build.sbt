@@ -1,4 +1,4 @@
-import Dependencies._
+import Dependencies.{Libraries, _}
 
 ThisBuild / scalaVersion := "2.13.5"
 ThisBuild / version := "0.0.1"
@@ -59,7 +59,12 @@ lazy val root = (project in file("."))
       Libraries.skunkCore,
       Libraries.skunkCirce,
       Libraries.squants,
-      Libraries.betterFile
+      Libraries.betterFile,
+      Libraries.doobieCore,
+      Libraries.doobieHikari,
+      Libraries.doobiePostgres,
+      Libraries.flywayCore,
+      Libraries.nameOf
     )
   )
 

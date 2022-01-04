@@ -45,22 +45,14 @@ object types {
   )
 
   case class AppConfig(
-      httpServerConfig: HttpServerConfig
+      httpServerConfig: HttpServerConfig,
+      dbConfig: DatabaseConfig
   )
 
   case class AdminJwtConfig(
       secretKey: Secret[JwtSecretKeyConfig],
       claimStr: Secret[JwtClaimConfig],
       adminToken: Secret[AdminUserTokenConfig]
-  )
-
-  case class PostgreSQLConfig(
-      host: NonEmptyString,
-      port: UserPortNumber,
-      user: NonEmptyString,
-      password: Secret[NonEmptyString],
-      database: NonEmptyString,
-      max: PosInt
   )
 
   @newtype case class RedisURI(value: NonEmptyString)

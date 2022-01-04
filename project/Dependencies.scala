@@ -22,6 +22,9 @@ object Dependencies {
     val skunk = "0.2.2"
     val squants = "1.8.3"
     val betterFile = "3.9.1"
+    val doobie = "1.0.0-RC1"
+    val flyway = "6.5.7"
+    val nameOf = "4.0.0"
 
     val betterMonadicFor = "0.3.1"
     val kindProjector = "0.13.2"
@@ -88,7 +91,15 @@ object Dependencies {
     val skunkCore = "org.tpolecat" %% "skunk-core" % V.skunk
     val skunkCirce = "org.tpolecat" %% "skunk-circe" % V.skunk
 
+    val doobieCore = "org.tpolecat" %% "doobie-core" % V.doobie
+    val doobiePostgres = "org.tpolecat" %% "doobie-postgres" % V.doobie
+    val doobieHikari = "org.tpolecat" %% "doobie-hikari" % V.doobie
+
+    val flywayCore = "org.flywaydb" % "flyway-core" % V.flyway
+
     val betterFile = "com.github.pathikrit" %% "better-files" % V.betterFile
+
+    val nameOf = "com.github.dwickern" %% "scala-nameof" % V.nameOf % "provided"
 
     // Runtime
     val logback = "ch.qos.logback" % "logback-classic" % V.logback

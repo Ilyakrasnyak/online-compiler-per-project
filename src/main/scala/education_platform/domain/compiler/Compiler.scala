@@ -1,6 +1,6 @@
 package education_platform.domain.compiler
 
-import education_platform.domain.compiler.domen._
+import education_platform.domain.compiler.domain._
 
 trait Compiler[A] {
   def fileExt: String
